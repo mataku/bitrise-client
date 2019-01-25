@@ -1,8 +1,7 @@
-require "bitrise/client/version"
-
 module Bitrise
-  module Client
-    class Error < StandardError; end
-    # Your code goes here...
+  class Client
+    def initialize(options = {})
+
+    end
   end
 end
