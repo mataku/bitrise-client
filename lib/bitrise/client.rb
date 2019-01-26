@@ -3,7 +3,7 @@ module Bitrise
     def initialize(options = {})
       @api_host = options[:host] || 'https://api.bitrise.io/v0.1'
       @timeout = options[:timeout] || 30
-      @api_token = options[:api_token] || raise ArgumentError.new('API token required')
+      @api_token = options[:api_token] || raise('API token required')
       @open_timeout = options[:open_timeout] || 30
     end
 
