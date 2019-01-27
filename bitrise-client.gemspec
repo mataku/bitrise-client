@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["mataku"]
   spec.email         = ["nagomimatcha@gmail.com"]
 
-  spec.summary       = %q{Bitrise API client}
-  spec.description   = %q{Bitrise API client}
+  spec.summary       = %q{A ruby clent for Bitrise API}
+  spec.description   = %q{A ruby client for Bitrise API}
   spec.homepage      = "https://github.com/mataku/bitrise-client"
   spec.license       = "MIT"
 
