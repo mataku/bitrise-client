@@ -16,7 +16,7 @@ module Bitrise
         faraday.options.timeout        = @timeout
         faraday.options.open_timeout   = @open_timeout
         faraday.options.params_encoder = Faraday::FlatParamsEncoder
-        faraday.response :logger
+        faraday.response :logger if ENV['DEBUG']
 
         faraday.adapter Faraday.default_adapter
       end
