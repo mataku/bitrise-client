@@ -1,7 +1,12 @@
+require 'bitrise/client/build'
 require 'faraday'
 
 module Bitrise
   class Client
+    include Bitrise::Client::Build
+
+
+    # 
     def initialize(options = {})
       @api_host = options[:host] || 'https://app.bitrise.io'
       @timeout = options[:timeout] || 30
