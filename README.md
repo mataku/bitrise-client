@@ -2,7 +2,7 @@
 
 A ruby client for [Bitrise API](https://devcenter.bitrise.io/#bitrise-api).
 
-Now supports [Build Trigger API](Build Trigger API) only.
+Now supports [Build Trigger API](https://devcenter.bitrise.io/api/build-trigger/) only.
 
 ## Installation
 
