@@ -26,7 +26,18 @@ module Bitrise
           }.to_json
         end
 
+        check_http_status(response)
+
         JSON.parse(response.body)
+      end
+
+      def check_http_status(response)
+        case response.status
+        when 200..299 then
+          return
+        else
+          raise JSON.parse(response.body)['message']
+        end
       end
     end
   end
