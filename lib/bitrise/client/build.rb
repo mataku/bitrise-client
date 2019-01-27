@@ -10,7 +10,7 @@ module Bitrise
       # @param build_trigger_token [String] Build Trigger token of your app
       # 
       # See: https://devcenter.bitrise.io/api/build-trigger/
-      def trigger(app_slug = nil, build_trigger_token = nil, options = {})
+      def trigger_build(app_slug = nil, build_trigger_token = nil, options = {})
         @app_slug = app_slug || raise('App slug required.')
         @build_trigger_token = build_trigger_token || raise('Build trigger token required.')
 

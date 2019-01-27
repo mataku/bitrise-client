@@ -3,7 +3,7 @@ RSpec.describe Bitrise::Client::Build do
   let(:test_build_trigger_token) { 'build_trigger_token' }
   let(:client) { Bitrise::Client.new }
 
-  describe '#trigger' do
+  describe '#trigger_build' do
     let(:path) { "/app/#{test_app_slug}/build/start.json" }
 
     let(:response) do
@@ -34,7 +34,7 @@ RSpec.describe Bitrise::Client::Build do
     end
 
     it do
-      expect(client.trigger(app_slug = test_app_slug, build_trigger_token = test_build_trigger_token)['status']).to eq('ok')
+      expect(client.trigger_build(app_slug = test_app_slug, build_trigger_token = test_build_trigger_token)['status']).to eq('ok')
     end
   end
 end

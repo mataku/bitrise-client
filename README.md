@@ -1,8 +1,8 @@
 # Bitrise::Client
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/bitrise/client`. To experiment with that code, run `bin/console` for an interactive prompt.
+A ruby client for [Bitrise API](https://devcenter.bitrise.io/#bitrise-api).
 
-TODO: Delete this and the text above, and describe your gem
+Now supports [Build Trigger API](Build Trigger API) only.
 
 ## Installation
 
@@ -22,17 +22,20 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+client = Bitrise::Client.new
+client.trigger_build(
+  app_slug = 'your_app_slug', # required
+  build_trigger_token = 'your_build_trigger_token', # required
+  build_params: {
+    # A tag, branch or workflow_id parameter required
+    branch: 'branch',
+    tag:    'tag',
+    workflow_id: 'workflow_id'
+  }
+)
+```
 
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/bitrise-client.
 
 ## License
 
