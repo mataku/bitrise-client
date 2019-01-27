@@ -1,0 +1,1 @@
+require 'bitrise/client'
