@@ -5,15 +5,11 @@ module Bitrise
   class Client
     include Bitrise::Client::Build
 
-
-    # 
     def initialize(options = {})
       @api_host = options[:host] || 'https://app.bitrise.io'
       @timeout = options[:timeout] || 30
       @open_timeout = options[:open_timeout] || 30
     end
-
-    private
 
     def client
       @client ||= Faraday.new(url: @api_host) do |faraday|
