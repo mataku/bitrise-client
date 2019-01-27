@@ -23,6 +23,8 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
+require 'bitrise'
+
 client = Bitrise::Client.new
 client.trigger_build(
   app_slug = 'your_app_slug', # required
