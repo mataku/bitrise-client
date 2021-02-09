@@ -1,8 +1,0 @@
----
-sudo: false
-language: ruby
-cache: bundler
-rvm:
-  - 2.6.0
-script:
-  - bundle exec rspec spec
