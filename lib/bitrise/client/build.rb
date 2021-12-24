@@ -14,7 +14,7 @@ module Bitrise
         access_token || raise('Access token required.')
 
         response = client.post do |request|
-          request.url "/v0.1/apps/#{@app_slug}/builds"
+          request.url "/v0.1/apps/#{app_slug}/builds"
           request.headers['Content-Type'] = 'application/json'
           request.headers['Authorization'] = access_token
           request.body = {
