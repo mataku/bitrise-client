@@ -14,7 +14,11 @@ RSpec.describe Bitrise::Client::Build do
           "status"=>"ok",
           "message"=>"Webhook triggered",
           "slug"=>"xxxxxxxxxxxxxxxx",
-          "service"=>"bitrise"
+          "service"=>"bitrise",
+          "triggered_workflow"=>'primary',
+          "build_number"=>1,
+          "build_slug"=>"1234567a-abc1-abc1-abc1-1234567890ab",
+          "build_url"=>"https://app.bitrise.io/build/1234567a-abc1-abc1-abc1-1234567890ab"
         })
       ]
     end
@@ -35,8 +39,16 @@ RSpec.describe Bitrise::Client::Build do
         allow(client).to receive(:client).and_return(test_client)
       end
 
-      it do
-        expect(client.trigger_build(app_slug = test_app_slug, access_token = test_access_token)['status']).to eq('ok')
+      it 'returns BuildTriggerResult' do
+        result = client.trigger_build(app_slug = test_app_slug, access_token = test_access_token)
+        expect(result.status).to eq('ok')
+        expect(result.message).to eq('Webhook triggered')
+        expect(result.slug).to eq('xxxxxxxxxxxxxxxx')
+        expect(result.service).to eq('bitrise')
+        expect(result.triggered_workflow).to eq('primary')
+        expect(result.build_number).to eq(1)
+        expect(result.build_slug).to eq('1234567a-abc1-abc1-abc1-1234567890ab')
+        expect(result.build_url).to eq('https://app.bitrise.io/build/1234567a-abc1-abc1-abc1-1234567890ab')
       end
     end
 

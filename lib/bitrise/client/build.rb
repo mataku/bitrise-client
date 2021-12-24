@@ -1,4 +1,5 @@
 require 'json'
+require 'bitrise/build_trigger_result'
 
 module Bitrise
   class Client
@@ -6,7 +7,9 @@ module Bitrise
       # Trigger a build of your bitrise app
       #
       # @param app_slug [String] Your bitrise app slug
-      # @param build_trigger_token [String] Build Trigger token of your app
+      # @param access_token [String] Access token
+      #
+      # @return [Bitrise::BuildTriggerResult]
       #
       # See: https://devcenter.bitrise.io/api/build-trigger/
       def trigger_build(app_slug = nil, access_token = nil, options = {})
@@ -25,7 +28,8 @@ module Bitrise
           }.to_json
         end
 
-        JSON.parse(response.body)
+        result = JSON.parse(response.body)
+        BuildTriggerResult.new(result)
       end
     end
   end
