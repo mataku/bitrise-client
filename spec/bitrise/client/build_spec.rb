@@ -21,6 +21,7 @@ RSpec.describe Bitrise::Client::Build do
 
     let(:test_client) do
       Faraday.new(url: 'https://api.bitrise.io') do |faraday|
+        faraday.use Bitrise::Client::Middleware::ErrorHandler
         faraday.adapter :test, Faraday::Adapter::Test::Stubs.new do |stub|
           stub.post(path) do
             response
@@ -29,12 +30,34 @@ RSpec.describe Bitrise::Client::Build do
       end
     end
 
-    before do
-      allow(client).to receive(:client).and_return(test_client)
+    context 'request succeeded' do
+      before do
+        allow(client).to receive(:client).and_return(test_client)
+      end
+
+      it do
+        expect(client.trigger_build(app_slug = test_app_slug, access_token = test_access_token)['status']).to eq('ok')
+      end
     end
 
-    it do
-      expect(client.trigger_build(app_slug = test_app_slug, access_token = test_access_token)['status']).to eq('ok')
+    context 'request failed' do
+      let(:response) do
+        [
+          422,
+          {},
+          JSON.dump({
+            "message"=>"Error",
+          })
+        ]
+      end
+
+      before do
+        allow(client).to receive(:client).and_return(test_client)
+      end
+
+      it do
+        expect { client.trigger_build(app_slug = test_app_slug, access_token = test_access_token) }.to raise_error(Bitrise::Error)
+      end
     end
   end
 end

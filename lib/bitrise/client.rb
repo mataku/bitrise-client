@@ -1,4 +1,5 @@
 require 'bitrise/client/build'
+require 'bitrise/client/middleware/error_handler'
 require 'faraday'
 
 module Bitrise
@@ -16,6 +17,7 @@ module Bitrise
         faraday.options.timeout        = @timeout
         faraday.options.open_timeout   = @open_timeout
         faraday.options.params_encoder = Faraday::FlatParamsEncoder
+        faraday.use Bitrise::Client::Middleware::ErrorHandler
         faraday.response :logger if ENV['DEBUG']
 
         faraday.adapter Faraday.default_adapter

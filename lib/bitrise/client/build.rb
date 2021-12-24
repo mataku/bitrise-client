@@ -10,8 +10,8 @@ module Bitrise
       #
       # See: https://devcenter.bitrise.io/api/build-trigger/
       def trigger_build(app_slug = nil, access_token = nil, options = {})
-        app_slug || raise ArgumentError.new('App slug required.')
-        access_token || raise AtgumentError.new('Access token required.')
+        raise ArgumentError, 'App slug required.' unless app_slug
+        raise ArgumentError, 'Access token required.' unless access_token
 
         response = client.post do |request|
           request.url "/v0.1/apps/#{app_slug}/builds"
@@ -25,18 +25,7 @@ module Bitrise
           }.to_json
         end
 
-        check_http_status(response)
-
         JSON.parse(response.body)
-      end
-
-      def check_http_status(response)
-        case response.status
-        when 200..299 then
-          return
-        else
-          raise JSON.parse(response.body)['message']
-        end
       end
     end
   end
