@@ -10,8 +10,8 @@ module Bitrise
       #
       # See: https://devcenter.bitrise.io/api/build-trigger/
       def trigger_build(app_slug = nil, access_token = nil, options = {})
-        app_slug || raise('App slug required.')
-        access_token || raise('Access token required.')
+        app_slug || raise ArgumentError.new('App slug required.')
+        access_token || raise AtgumentError.new('Access token required.')
 
         response = client.post do |request|
           request.url "/v0.1/apps/#{app_slug}/builds"
