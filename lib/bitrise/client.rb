@@ -6,7 +6,7 @@ module Bitrise
     include Bitrise::Client::Build
 
     def initialize(options = {})
-      @api_host = options[:host] || 'https://app.bitrise.io'
+      @api_host = options[:host] || 'https://api.bitrise.io'
       @timeout = options[:timeout] || 30
       @open_timeout = options[:open_timeout] || 30
     end
