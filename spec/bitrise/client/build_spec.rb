@@ -1,10 +1,10 @@
 RSpec.describe Bitrise::Client::Build do
   let(:test_app_slug) { 'test_app_slug' }
-  let(:test_build_trigger_token) { 'build_trigger_token' }
+  let(:test_access_token) { 'access_token' }
   let(:client) { Bitrise::Client.new }
 
   describe '#trigger_build' do
-    let(:path) { "/app/#{test_app_slug}/build/start.json" }
+    let(:path) { "/v0.1/apps/#{test_app_slug}/builds" }
 
     let(:response) do
       [
@@ -20,7 +20,7 @@ RSpec.describe Bitrise::Client::Build do
     end
 
     let(:test_client) do
-      Faraday.new do |faraday|
+      Faraday.new(url: 'https://api.bitrise.io') do |faraday|
         faraday.adapter :test, Faraday::Adapter::Test::Stubs.new do |stub|
           stub.post(path) do
             response
@@ -34,7 +34,7 @@ RSpec.describe Bitrise::Client::Build do
     end
 
     it do
-      expect(client.trigger_build(app_slug = test_app_slug, build_trigger_token = test_build_trigger_token)['status']).to eq('ok')
+      expect(client.trigger_build(app_slug = test_app_slug, access_token = test_access_token)['status']).to eq('ok')
     end
   end
 end
