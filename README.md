@@ -2,7 +2,7 @@
 
 A ruby client for [Bitrise API](https://devcenter.bitrise.io/#bitrise-api).
 
-Now supports v0.1 [Build Trigger API](https://devcenter.bitrise.io/api/build-trigger/) and [Test Devices](https://devcenter.bitrise.io/en/api/api-reference.html#api-reference) only.
+Now supports v0.1 [Build Trigger API](https://devcenter.bitrise.io/api/build-trigger/) and [Test Devices](https://devcenter.bitrise.io/en/api/api-reference.html#operations-tag-test-devices) only.
 
 ## Installation
 
