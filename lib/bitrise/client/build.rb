@@ -42,8 +42,6 @@ module Bitrise
     # @option opts [Boolean] :abort_with_success  Treat as a successful or not
     # @option opts [Boolean] :skip_notifications  Set true if you want to send email notifications about aborting by Bitrise
     #
-    # @return [Bitrise::BuildTriggerResult]
-    #
     # See: https://devcenter.bitrise.io/en/api/triggering-and-aborting-builds.html#aborting-a-build
     def abort_build(app_slug: nil, build_slug: nil, options: {})
       raise ArgumentError, 'App slug required. You must specify by \'app_slug:\'' unless app_slug
