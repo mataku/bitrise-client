@@ -61,6 +61,11 @@ devices = client.test_devices(
   # Required
   app_slug: 'your_app_slug'
 )
+devices.each do |device|
+  p device.device_id
+  p device.device_type
+  p device.owner
+end
 ```
 
 
