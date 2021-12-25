@@ -2,7 +2,7 @@
 
 A ruby client for [Bitrise API](https://devcenter.bitrise.io/#bitrise-api).
 
-Now supports [Build Trigger API](https://devcenter.bitrise.io/api/build-trigger/) only.
+Now supports v0.1 [Build Trigger API](https://devcenter.bitrise.io/api/build-trigger/) only.
 
 ## Installation
 
@@ -23,14 +23,15 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
+# Trigger a build
 require 'bitrise'
 
-client = Bitrise::Client.new
+# Access token required to use bitrise v0.1 API. See: https://devcenter.bitrise.io/en/api/authenticating-with-the-bitrise-api.html
+client = Bitrise::Client.new(access_token: 'your access token')
 client.trigger_build(
-  app_slug = 'your_app_slug', # required
-  build_trigger_token = 'your_build_trigger_token', # required
+  app_slug: 'your_app_slug', # Required
   build_params: {
-    # A tag, branch or workflow_id parameter required
+    # A tag, branch or workflow_id parameter required so that Bitrise can identify which workflow to run
     branch: 'branch',
     tag:    'tag',
     workflow_id: 'workflow_id'
