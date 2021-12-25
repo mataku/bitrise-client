@@ -70,7 +70,7 @@ end
 
 ## Changelog
 
-See [/CHANGELOG.md]
+See [CHANGELOG.md](/CHANGELOG.md)
 
 ## License
 
