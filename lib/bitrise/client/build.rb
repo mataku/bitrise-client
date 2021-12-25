@@ -1,5 +1,5 @@
-require 'json'
 require 'bitrise/build_trigger_result'
+require 'json'
 
 module Bitrise
   class Client

@@ -1,10 +1,16 @@
-require 'bitrise/client/build'
-require 'bitrise/client/middleware/error_handler'
-require 'faraday'
+%w(
+  bitrise/client/build
+  bitrise/client/test_device
+  bitrise/client/middleware/error_handler
+  faraday
+).each do |lib|
+  require lib
+end
 
 module Bitrise
   class Client
     include Bitrise::Client::Build
+    include Bitrise::Client::TestDevice
 
     def initialize(access_token: nil, options: {})
       raise ArgumentError.new('You must specify Bitrise access token by `access_token:`.') unless access_token

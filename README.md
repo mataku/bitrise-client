@@ -2,7 +2,7 @@
 
 A ruby client for [Bitrise API](https://devcenter.bitrise.io/#bitrise-api).
 
-Now supports v0.1 [Build Trigger API](https://devcenter.bitrise.io/api/build-trigger/) only.
+Now supports v0.1 [Build Trigger API](https://devcenter.bitrise.io/api/build-trigger/) and [Test Devices](https://devcenter.bitrise.io/en/api/api-reference.html#operations-tag-test-devices) only.
 
 ## Installation
 
@@ -55,6 +55,17 @@ client.abort_build(
     skip_notifications: true     # Set true if you want to receive notification even if your notification setting in app is off
   }
 )
+
+# List registered test devices of all members of a specified Bitrise app
+devices = client.test_devices(
+  # Required
+  app_slug: 'your_app_slug'
+)
+devices.each do |device|
+  p device.device_id
+  p device.device_type
+  p device.owner
+end
 ```
 
 
