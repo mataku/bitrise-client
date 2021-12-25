@@ -7,7 +7,7 @@ module Bitrise
       # Trigger a build of your bitrise app
       #
       # @param app_slug [String] Your bitrise app slug
-      # @param build_params [Hash] Bulld params so that Bitrise can identify which workflow to run. Specify a branch or tag or workflow_id.
+      # @param build_params [Hash] Bulld params so that Bitrise can identify which workflow to run. Specify a branch or tag or workflow_id at least.
       #
       # @return [Bitrise::BuildTriggerResult]
       #

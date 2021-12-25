@@ -32,7 +32,7 @@ client = Bitrise::Client.new(access_token: 'your access token')
 result = client.trigger_build(
   app_slug: 'your_app_slug', # Required
   build_params: {
-    # A tag, branch or workflow_id parameter required so that Bitrise can identify which workflow to run
+    # At least a tag, branch or workflow_id parameter required so that Bitrise can identify which workflow to run
     branch: 'branch',
     tag:    'tag',
     workflow_id: 'workflow_id'
