@@ -23,6 +23,7 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
+# Trigger a build
 require 'bitrise'
 
 # Access token required to use bitrise v0.1 API. See: https://devcenter.bitrise.io/en/api/authenticating-with-the-bitrise-api.html
