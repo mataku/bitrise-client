@@ -1,6 +1,16 @@
 RSpec.describe Bitrise::Client::Build do
   let(:app_slug) { 'test_app_slug' }
   let(:client) { Bitrise::Client.new(access_token: 'access_token') }
+  let(:test_client) do
+    Faraday.new(url: 'https://api.bitrise.io') do |faraday|
+      faraday.use Bitrise::Client::Middleware::ErrorHandler
+      faraday.adapter :test, Faraday::Adapter::Test::Stubs.new do |stub|
+        stub.post(path) do
+          response
+        end
+      end
+    end
+  end
 
   describe '#trigger_build' do
     let(:path) { "/v0.1/apps/#{app_slug}/builds" }
@@ -20,17 +30,6 @@ RSpec.describe Bitrise::Client::Build do
           "build_url"=>"https://app.bitrise.io/build/1234567a-abc1-abc1-abc1-1234567890ab"
         })
       ]
-    end
-
-    let(:test_client) do
-      Faraday.new(url: 'https://api.bitrise.io') do |faraday|
-        faraday.use Bitrise::Client::Middleware::ErrorHandler
-        faraday.adapter :test, Faraday::Adapter::Test::Stubs.new do |stub|
-          stub.post(path) do
-            response
-          end
-        end
-      end
     end
 
     let(:build_params) do
@@ -84,13 +83,71 @@ RSpec.describe Bitrise::Client::Build do
 
     end
 
-    context 'build_params id empty' do
+    context 'build_params is empty' do
       let(:error_message) do
         "No value found for 'branch' or 'tag' or 'workflow_id'"
       end
 
       it do
         expect { client.trigger_build(app_slug: app_slug) }.to raise_error(ArgumentError, error_message)
+      end
+    end
+  end
+
+  describe '#abort_build' do
+    let(:path) { "/v0.1/apps/#{app_slug}/builds/#{build_slug}/abort" }
+    let(:build_slug) { 'build1slug' }
+    let(:response) do
+      [
+        200,
+        {},
+        {}
+      ]
+    end
+
+    before do
+      allow(client).to receive(:client).and_return(test_client)
+    end
+
+    context 'request succeeded' do
+      it 'raises no errors' do
+        expect { client.abort_build(app_slug: app_slug, build_slug: build_slug) }.not_to raise_error
+      end
+    end
+
+    context 'request failed' do
+      let(:response) do
+        [
+          422,
+          {},
+          JSON.dump({
+            "message"=>"Error",
+          })
+        ]
+      end
+
+      it do
+        expect { client.abort_build(app_slug: app_slug, build_slug: build_slug) }.to raise_error(Bitrise::Error)
+      end
+    end
+
+    context 'app_slug is missing' do
+      let(:error_message) do
+        "App slug required. You must specify by 'app_slug:'"
+      end
+
+      it do
+        expect { client.abort_build(build_slug: build_slug) }.to raise_error(ArgumentError, error_message)
+      end
+    end
+
+    context 'build_slug is missing' do
+      let(:error_message) do
+        "Build slug required. You must specify by 'build_slug:'"
+      end
+
+      it do
+        expect { client.abort_build(app_slug: app_slug) }.to raise_error(ArgumentError, error_message)
       end
     end
   end
