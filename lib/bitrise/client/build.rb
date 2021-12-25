@@ -12,19 +12,18 @@ module Bitrise
       # @return [Bitrise::BuildTriggerResult]
       #
       # See: https://devcenter.bitrise.io/api/build-trigger/
-      def trigger_build(app_slug = nil, access_token = nil, options = {})
-        raise ArgumentError, 'App slug required.' unless app_slug
-        raise ArgumentError, 'Access token required.' unless access_token
+      def trigger_build(app_slug: nil, build_params: {})
+        raise ArgumentError, 'App slug required. You must specify by \'app_slug:\'' unless app_slug
+        raise ArgumentError, 'No value found for \'branch\' or \'tag\' or \'workflow_id\'' if build_params.empty?
 
         response = client.post do |request|
           request.url "/v0.1/apps/#{app_slug}/builds"
           request.headers['Content-Type'] = 'application/json'
-          request.headers['Authorization'] = access_token
           request.body = {
             hook_info: {
               type: 'bitrise'
             },
-            build_params: options[:build_params]
+            build_params: build_params
           }.to_json
         end
 

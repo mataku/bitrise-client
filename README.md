@@ -25,12 +25,12 @@ Or install it yourself as:
 ```ruby
 require 'bitrise'
 
-client = Bitrise::Client.new
+# Access token required to use bitrise v0.1 API. See: https://devcenter.bitrise.io/en/api/authenticating-with-the-bitrise-api.html
+client = Bitrise::Client.new(access_token: 'your access token')
 client.trigger_build(
-  app_slug = 'your_app_slug', # Required
-  access_token = 'your_access_token', # Required. See: https://devcenter.bitrise.io/en/api/authenticating-with-the-bitrise-api.html
+  app_slug: 'your_app_slug', # Required
   build_params: {
-    # A tag, branch or workflow_id parameter required
+    # A tag, branch or workflow_id parameter required so that Bitrise can identify which workflow to run
     branch: 'branch',
     tag:    'tag',
     workflow_id: 'workflow_id'

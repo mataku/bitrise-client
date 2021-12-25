@@ -1,10 +1,9 @@
 RSpec.describe Bitrise::Client::Build do
-  let(:test_app_slug) { 'test_app_slug' }
-  let(:test_access_token) { 'access_token' }
-  let(:client) { Bitrise::Client.new }
+  let(:app_slug) { 'test_app_slug' }
+  let(:client) { Bitrise::Client.new(access_token: 'access_token') }
 
   describe '#trigger_build' do
-    let(:path) { "/v0.1/apps/#{test_app_slug}/builds" }
+    let(:path) { "/v0.1/apps/#{app_slug}/builds" }
 
     let(:response) do
       [
@@ -34,13 +33,19 @@ RSpec.describe Bitrise::Client::Build do
       end
     end
 
-    context 'request succeeded' do
-      before do
-        allow(client).to receive(:client).and_return(test_client)
-      end
+    let(:build_params) do
+      {
+        branch: 'develop'
+      }
+    end
 
+    before do
+      allow(client).to receive(:client).and_return(test_client)
+    end
+
+    context 'request succeeded' do
       it 'returns BuildTriggerResult' do
-        result = client.trigger_build(app_slug = test_app_slug, access_token = test_access_token)
+        result = client.trigger_build(app_slug: app_slug, build_params: build_params)
         expect(result.status).to eq('ok')
         expect(result.message).to eq('Webhook triggered')
         expect(result.slug).to eq('xxxxxxxxxxxxxxxx')
@@ -63,12 +68,29 @@ RSpec.describe Bitrise::Client::Build do
         ]
       end
 
-      before do
-        allow(client).to receive(:client).and_return(test_client)
+      it do
+        expect { client.trigger_build(app_slug: app_slug, build_params: build_params) }.to raise_error(Bitrise::Error)
+      end
+    end
+
+    context 'app_slug is missing' do
+      let(:error_message) do
+        "App slug required. You must specify by 'app_slug:'"
       end
 
       it do
-        expect { client.trigger_build(app_slug = test_app_slug, access_token = test_access_token) }.to raise_error(Bitrise::Error)
+        expect { client.trigger_build(build_params: build_params) }.to raise_error(ArgumentError, error_message)
+      end
+
+    end
+
+    context 'build_params id empty' do
+      let(:error_message) do
+        "No value found for 'branch' or 'tag' or 'workflow_id'"
+      end
+
+      it do
+        expect { client.trigger_build(app_slug: app_slug) }.to raise_error(ArgumentError, error_message)
       end
     end
   end
