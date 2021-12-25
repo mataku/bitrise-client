@@ -1,7 +1,11 @@
-require 'bitrise/client/build'
-require 'bitrise/client/test_device'
-require 'bitrise/client/middleware/error_handler'
-require 'faraday'
+%w(
+  bitrise/client/build
+  bitrise/client/test_device
+  bitrise/client/middleware/error_handler
+  faraday
+).each do |lib|
+  require lib
+end
 
 module Bitrise
   class Client
