@@ -68,6 +68,9 @@ devices.each do |device|
 end
 ```
 
+## Changelog
+
+See [/CHANGELOG.md]
 
 ## License
 
