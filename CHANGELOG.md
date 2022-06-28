@@ -1,6 +1,6 @@
 ## v0.3.0
 
-Lock faraday version to 1.X because `Faraday::Response::Middleware` is deleted in faraday 2. - [tomorrowkey](https://github.com/tomorrowkey) [#5](https://github.com/mataku/bitrise-client/pull/5) 
+Lock faraday version to 1.X because `Faraday::Response::Middleware` is deleted in faraday 2. - [@tomorrowkey](https://github.com/tomorrowkey) [#5](https://github.com/mataku/bitrise-client/pull/5) 
 
 ## v0.2.0
 
