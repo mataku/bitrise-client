@@ -1,7 +1,5 @@
 module Bitrise
   class Response
-    attr_reader :json
-
     def initialize(json)
       @json = json
     end
@@ -18,7 +16,7 @@ module Bitrise
 
   module Pagination
     def paging
-      ::Bitrise::Paging.new(json["paging"])
+      ::Bitrise::Paging.new(@json["paging"])
     end
   end
 end
