@@ -1,4 +1,5 @@
 %w(
+  bitrise/client/app
   bitrise/client/build
   bitrise/client/test_device
   bitrise/client/middleware/error_handler
@@ -9,6 +10,7 @@ end
 
 module Bitrise
   class Client
+    include Bitrise::Client::App
     include Bitrise::Client::Build
     include Bitrise::Client::TestDevice
 
