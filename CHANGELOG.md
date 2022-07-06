@@ -1,3 +1,7 @@
+## v0.3.1
+
+Add GET apps. - [@tomorrowkey](https://github.com/tomorrowkey) [#6](https://github.com/mataku/bitrise-client/pull/6)
+
 ## v0.3.0
 
 Lock faraday version to 1.X because `Faraday::Response::Middleware` is deleted in faraday 2. - [@tomorrowkey](https://github.com/tomorrowkey) [#5](https://github.com/mataku/bitrise-client/pull/5) 
