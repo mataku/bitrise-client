@@ -6,11 +6,12 @@ module Bitrise
   end
 
   class Paging
-    attr_reader :total_item_count, :page_item_limit
+    attr_reader :total_item_count, :page_item_limit, :next
 
     def initialize(attrs = {})
       @total_item_count = attrs['total_item_count']
       @page_item_limit = attrs['page_item_limit']
+      @next = attrs['next']
     end
   end
 

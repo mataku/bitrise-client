@@ -36,6 +36,7 @@ RSpec.describe Bitrise::Client::Build do
           paging: {
             total_item_count: 1,
             page_item_limit: 50,
+            next: "zzzzzzzzzzzzzzzz",
           }
         }
       end
@@ -65,6 +66,7 @@ RSpec.describe Bitrise::Client::Build do
         expect(result.paging).to have_attributes(
           total_item_count: 1,
           page_item_limit: 50,
+          next: "zzzzzzzzzzzzzzzz",
         )
       end
     end
