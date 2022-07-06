@@ -1,9 +1,10 @@
 name: Test
 
 on:
+  pull_request:
   push:
     branches:
-      - "**"
+      - develop
 
 concurrency:
   group: ${{ github.ref }}
